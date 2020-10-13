@@ -51,90 +51,95 @@ class hentai:
 
           
           def getsite():
-           self.root.update()
-           sitename=comb.get()
-           entres=sites.get()
-           if sitename=="select" and entres=="":
-               tkinter.messagebox.askretrycancel("Info","please select the site name first / And write the site url",icon="info")
+                self.root.update()
+                sitename=comb.get()
+                entres=sites.get()
+                if sitename=="select" and entres=="":
+                    tkinter.messagebox.askretrycancel("Info","please select the site name first / And write the site url",icon="info")
 
-           elif not entres:
-                tkinter.messagebox.askretrycancel("Info","please select the correct site name and url",icon="info")
-                
+                elif not entres:
+                     tkinter.messagebox.askretrycancel("Info","please select the correct site name and url",icon="info")
+                     
 
-           elif sitename=="select" or entres=="":
-               tkinter.messagebox.askretrycancel("Info","please select the site name first / And write the site url",icon="info")
-           elif sitename=="select":
-               tkinter.messagebox.askretrycancel("Info","please select the site name first",icon="info")
+                elif sitename=="select" or entres=="":
+                    tkinter.messagebox.askretrycancel("Info","please select the site name first / And write the site url",icon="info")
+                elif sitename=="select":
+                    tkinter.messagebox.askretrycancel("Info","please select the site name first",icon="info")
 
-           elif sitename=="ilikecomix.com":
-               try:
-                    parent="C:\\Users\\SHREYAS\\Desktop\\shreyas python\\Hentaiboy"
-                    num=random.randint(1,100)
-                    dirs="ilikecomix{}".format(num)
-                    path=os.path.join(parent,dirs)
-                    os.mkdir(path)
+                elif sitename=="ilikecomix.com":
+                    try:
+                         parent="C:\\Users\\SHREYAS\\Desktop\\shreyas python\\Hentaiboy"
+                         num=random.randint(1,100)
+                         dirs="ilikecomix{}".format(num)
+                         path=os.path.join(parent,dirs)
+                         os.mkdir(path)
 
-                    site=sites.get()
-                    response=requests.get(site)
+                         site=sites.get()
+                         response=requests.get(site)
 
-                    Soup=BeautifulSoup(response.text,"html.parser")
-                    gather=Soup.findAll("a")
-                    urls=[images["href"] for images in gather]
-                    for url in urls:
-                        filename = re.search(r'/([\w_-]+[.](jpg|gif|png))$', url)
-                        if not filename:
-                             Lab.config(text="Regex didn't match with the url: {}".format(url))
-                             continue
-                        with open(path+"\\"+filename.group(1), 'wb') as f:
-                            if 'http' not in url:
-                                # sometimes an image source can be relative 
-                                # if it is provide the base url which also happens 
-                                # to be the site variable atm. 
-                                url = '{}{}'.format(site, url)
-                                
-                            response = requests.get(url)
-                            
-                            f.write(response.content)
+                         Soup=BeautifulSoup(response.text,"html.parser")
+                         gather=Soup.findAll("a")
+                         urls=[images["href"] for images in gather]
+                         for url in urls:
+                             filename = re.search(r'/([\w_-]+[.](jpg|gif|png))$', url)
+                             if not filename:
+                                  Lab.config(text="Regex didn't match with the url: {}".format(url))
+                                  continue
+                             with open(path+"\\"+filename.group(1), 'wb') as f:
+                                 if 'http' not in url:
+                                     # sometimes an image source can be relative 
+                                     # if it is provide the base url which also happens 
+                                     # to be the site variable atm. 
+                                     url = '{}{}'.format(site, url)
+                                     
+                                 response = requests.get(url)
+                                 
+                                 f.write(response.content)
 
-               except:
-                     tkinter.messagebox.askretrycancel("Info","please check the url / Network error",icon="info")
+                    except:
+                          tkinter.messagebox.askretrycancel("Info","please check the url / Network error",icon="info")
 
-           elif sitename=="porncomics.one":
-               try:
-                    parent="C:\\Users\\SHREYAS\\Desktop\\shreyas python\\Hentaiboy"
-                    num=random.randint(1,100)
-                    dirs="porncomics.one{}".format(num)
-                    path=os.path.join(parent,dirs)
-                    os.mkdir(path)
+                elif sitename=="porncomics.one":
+                    try:
+                         parent="C:\\Users\\SHREYAS\\Desktop\\shreyas python\\Hentaiboy"
+                         num=random.randint(1,100)
+                         dirs="porncomics.one{}".format(num)
+                         path=os.path.join(parent,dirs)
+                         os.mkdir(path)
 
-                    site=sites.get()
-                    response=requests.get(site)
+                         site=sites.get()
+                         response=requests.get(site)
 
-                    Soup=BeautifulSoup(response.text,"html.parser")
-                    gather=Soup.findAll("a")
-                    urls=[images["href"] for images in gather]
-                    for url in urls:
-                        filename = re.search(r'/([\w_-]+[.](jpg|gif|png))$', url)
-                        if not filename:
-                             Lab.config(text="Regex didn't match with the url: {}".format(url))
-                             continue
-                        with open(path+"\\"+filename.group(1), 'wb') as f:
-                            if 'http' not in url:
-                                # sometimes an image source can be relative 
-                                # if it is provide the base url which also happens 
-                                # to be the site variable atm. 
-                                url = '{}{}'.format(site, url)
-                                
-                            response = requests.get(url)                     
-                            f.write(response.content)
+                         Soup=BeautifulSoup(response.text,"html.parser")
+                         gather=Soup.findAll("a")
+                         urls=[images["href"] for images in gather]
+                         for url in urls:
+                             filename = re.search(r'/([\w_-]+[.](jpg|gif|png))$', url)
+                             if not filename:
+                                  Lab.config(text="Regex didn't match with the url: {}".format(url))
+                                  continue
+                             with open(path+"\\"+filename.group(1), 'wb') as f:
+                                 if 'http' not in url:
+                                     # sometimes an image source can be relative 
+                                     # if it is provide the base url which also happens 
+                                     # to be the site variable atm. 
+                                     url = '{}{}'.format(site, url)
+                                   
+                                 response = requests.get(url)                     
+                                 f.write(response.content)
 
-               except:
-                     tkinter.messagebox.askretrycancel("Info","please check the url / Network error",icon="info")
-                                      
-           else:
-                tkinter.messagebox.askretrycancel("Info","please check the url or internal error",icon="info")
-               
-        
+                    except:
+                          tkinter.messagebox.askretrycancel("Info","please check the url / Network error",icon="info")
+                                           
+                else:
+                     tkinter.messagebox.askretrycancel("Info","please check the url or internal error",icon="info")
+
+
+          def down():
+               t1=threading.Thread(target=getsite)
+               t1.start()
+                    
+             
 
 #=================================  FRAME====================================#
          
